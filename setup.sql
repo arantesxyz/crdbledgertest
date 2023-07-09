@@ -6,7 +6,9 @@ CREATE TABLE accounts (
         allow_negative :: int between 0
         and 1
     ),
-    CONSTRAINT check_account_positive_balance CHECK (balance * abs(allow_negative :: int - 1) >= 0)
+    CONSTRAINT check_account_positive_balance CHECK (balance * abs(allow_negative :: int - 1) >= 0),
+    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
 );
 
 CREATE TABLE transfers (
@@ -14,5 +16,7 @@ CREATE TABLE transfers (
     account_id UUID,
     amount NUMERIC(12, 2),
     isCredit BOOLEAN,
-    status VARCHAR(10)
+    status VARCHAR(10),
+    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
 )
