@@ -9,7 +9,7 @@ import (
 func UpdateBalance(tx pgx.Tx, accountId string, amount float32) error {
 	_, err := tx.Exec(
 		context.Background(),
-		"UPDATE accounts SET balance = balance + $1 WHERE id = $2",
+		"UPDATE accounts SET balance = balance + $1, updated_at=clock_timestamp() WHERE id = $2",
 		amount,
 		accountId,
 	)
